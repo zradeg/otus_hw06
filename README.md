@@ -65,18 +65,21 @@
 
 ## Переименование VG
 Выясняем данные по VG:
-``` [root@hw06 vagrant]# vgs
+```
+[root@hw06 vagrant]# vgs
   VG                  #PV #LV #SN Attr   VSize  VFree
   centos_centos7-hw06   1   2   0 wz--n- <5.00g    0
   ```
 И для логических томов в этой группе:
-``` [root@hw06 vagrant]# lvs centos_centos7-hw06
+```
+[root@hw06 vagrant]# lvs centos_centos7-hw06
   LV   VG                  Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
   root centos_centos7-hw06 -wi-ao----   4.39g
   swap centos_centos7-hw06 -wi-ao---- 616.00m
  ```
 Переименовываем VG с помощью утилиты __vgrename__ и проверяем результат:
-``` [root@hw06 vagrant]# vgrename centos_centos7-hw06 hw06
+```
+[root@hw06 vagrant]# vgrename centos_centos7-hw06 hw06
   Volume group "centos_centos7-hw06" successfully renamed to "hw06"
 [root@hw06 vagrant]# vgs
   VG   #PV #LV #SN Attr   VSize  VFree
@@ -85,7 +88,8 @@
  ```
 
 Проверяем содержимое /etc/fstab:
-``` [root@hw06 vagrant]# cat /etc/fstab
+```
+[root@hw06 vagrant]# cat /etc/fstab
 Created by anaconda on Wed Mar 11 13:13:28 2020
 
 Accessible filesystems, by reference, are maintained under '/dev/disk'
@@ -96,36 +100,44 @@ UUID=867dc2a2-f38a-422e-a518-b346654e1614 /boot                   xfs     defaul
 /dev/mapper/centos_centos7--hw06-swap swap                    swap    defaults        0 0
 ```
 Здесь видно, что необходимо учесть для замены посредством __sed:
-```[root@hw06 vagrant]# sed -i 's/centos_centos7--hw06/hw06/g' /etc/fstab
+```
+[root@hw06 vagrant]# sed -i 's/centos_centos7--hw06/hw06/g' /etc/fstab
 ```
 Так же, с помощью __sed редактируем /etc/default/grub
-```[root@hw06 vagrant]# sed -i 's/centos_centos7-hw06/hw06/g' /etc/default/grub
+```
+[root@hw06 vagrant]# sed -i 's/centos_centos7-hw06/hw06/g' /etc/default/grub
  ```
 И /boot/grub2/grub.cfg:
-```[root@hw06 vagrant]# sed -i 's/centos_centos7-hw06/hw06/g' /boot/grub2/grub.cfg
+```
+[root@hw06 vagrant]# sed -i 's/centos_centos7-hw06/hw06/g' /boot/grub2/grub.cfg
  ```
 Проверяем:
-```[root@hw06 vagrant]# grep hw06 /boot/grub2/grub.cfg
+```
+[root@hw06 vagrant]# grep hw06 /boot/grub2/grub.cfg
         linux16 /vmlinuz-3.10.0-1062.12.1.el7.x86_64 root=/dev/mapper/centos_centos7--hw06-root ro crashkernel=auto spectre_v2=retpoline rd.lvm.lv=hw06/root rd.lvm.lv=hw06/swap rhgb quiet LANG=en_US.UTF-8
         linux16 /vmlinuz-3.10.0-1062.el7.x86_64 root=/dev/mapper/centos_centos7--hw06-root ro crashkernel=auto spectre_v2=retpoline rd.lvm.lv=hw06/root rd.lvm.lv=hw06/swap rhgb quiet LANG=en_US.UTF-8
         linux16 /vmlinuz-0-rescue-a002dae36b884b389571c3b93e615705 root=/dev/mapper/centos_centos7--hw0-root ro crashkernel=auto spectre_v2=retpoline rd.lvm.lv=hw06/root rd.lvm.lv=hw06/swap rhgb quiet
  ```
 Заменяем оставшееся:
-```[root@hw06 vagrant]# sed -i 's/centos_centos7--hw06/hw06/g' /boot/grub2/grub.cfg
+```
+[root@hw06 vagrant]# sed -i 's/centos_centos7--hw06/hw06/g' /boot/grub2/grub.cfg
  ```
 Проверяем:
-```[root@hw06 vagrant]# grep hw06 /boot/grub2/grub.cfg
+```
+[root@hw06 vagrant]# grep hw06 /boot/grub2/grub.cfg
         linux16 /vmlinuz-3.10.0-1062.12.1.el7.x86_64 root=/dev/mapper/hw06-root ro crashkernel=auto spectre_v2=retpoline rd.lvm.lv=hw06/root rd.lvm.lv=hw06/swap rhgb quiet LANG=en_US.UTF-8
         linux16 /vmlinuz-3.10.0-1062.el7.x86_64 root=/dev/mapper/hw06-root ro crashkernel=auto spectre_v2=retpoline rd.lvm.lv=hw06/root rd.lvm.lv=hw06/swap rhgb quiet LANG=en_US.UTF-8
         linux16 /vmlinuz-0-rescue-a002dae36b884b389571c3b93e615705 root=/dev/mapper/hw06-root ro crashkernel=auto spectre_v2=retpoline rd.lvm.lv=hw06/root rd.lvm.lv=hw06/swap rhgb quiet
  ```
 Обновляем атрибуты VG
-```[root@hw06 vagrant]# vgchange -ay
+```
+[root@hw06 vagrant]# vgchange -ay
   2 logical volume(s) in volume group "hw06" now active
  ```
 
 Обновляем initrd:
-```[root@hw06 vagrant]# mkinitrd -f -v /boot/initramfs-$(uname -r).img $(uname -r)
+```
+[root@hw06 vagrant]# mkinitrd -f -v /boot/initramfs-$(uname -r).img $(uname -r)
 /sbin/dracut: line 681: warning: setlocale: LC_MESSAGES: cannot change locale (C.UTF-8): No such file or directory
 /sbin/dracut: line 682: warning: setlocale: LC_CTYPE: cannot change locale (C.UTF-8): No such file or directory
 Executing: /sbin/dracut -f -v /boot/initramfs-3.10.0-1062.12.1.el7.x86_64.img 3.10.0-1062.12.1.el7.x86_64
@@ -221,10 +233,12 @@ intel-06-55-04: caveat is disabled in configuration
 *** Creating initramfs image file '/boot/initramfs-3.10.0-1062.12.1.el7.x86_64.img' done ***
  ```
 Перезагружаемся:
-```[root@hw06 vagrant]# reboot
+```
+[root@hw06 vagrant]# reboot
  ```
 ### Проверка
-```[root@hw06 vagrant]# vgs
+```
+[root@hw06 vagrant]# vgs
   VG   #PV #LV #SN Attr   VSize  VFree
   hw06   1   2   0 wz--n- <5.00g    0
 [root@hw06 vagrant]# lvs
@@ -236,7 +250,8 @@ intel-06-55-04: caveat is disabled in configuration
 
 ## Добавить свой модуль в initrd
 Переходим в директорию с модулями, создаем новую директорию для своего модуля, в ней создаем файлы модуля:
-```[root@hw06 vagrant]# cd /usr/lib/dracut/modules.d/
+```
+[root@hw06 vagrant]# cd /usr/lib/dracut/modules.d/
 [root@hw06 modules.d]# mkdir 01logo
 [root@hw06 modules.d]# cd 01logo
 
@@ -291,7 +306,8 @@ install() {
  ```
 
 Пересоздаем initrd:
-```[root@hw06 vagrant]# mkinitrd -f -v /boot/initramfs-$(uname -r).img $(uname -r)
+```
+[root@hw06 vagrant]# mkinitrd -f -v /boot/initramfs-$(uname -r).img $(uname -r)
 /sbin/dracut: line 681: warning: setlocale: LC_MESSAGES: cannot change locale (C.UTF-8): No such file or directory
 /sbin/dracut: line 682: warning: setlocale: LC_CTYPE: cannot change locale (C.UTF-8): No such file or directory
 Executing: /sbin/dracut -f -v /boot/initramfs-3.10.0-1062.12.1.el7.x86_64.img 3.10.0-1062.12.1.el7.x86_64
@@ -389,7 +405,8 @@ intel-06-55-04: caveat is disabled in configuration
  ```
 Проверяем:
 
-```[root@hw06 01logo]# lsinitrd -m /boot/initramfs-$(uname -r).img | grep logo
+```
+[root@hw06 01logo]# lsinitrd -m /boot/initramfs-$(uname -r).img | grep logo
 logo
  ```
 Отправляем систему в перезагрузку и в процессе наблюдаем результат:
