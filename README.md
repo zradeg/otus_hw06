@@ -388,6 +388,7 @@ intel-06-55-04: caveat is disabled in configuration
 *** Creating initramfs image file '/boot/initramfs-3.10.0-1062.12.1.el7.x86_64.img' done ***
  ```
 Проверяем:
+
 ```[root@hw06 01logo]# lsinitrd -m /boot/initramfs-$(uname -r).img | grep logo
 logo
  ```
