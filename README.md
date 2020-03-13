@@ -65,18 +65,18 @@
 
 ## Переименование VG
 Выясняем данные по VG:
-```[root@hw06 vagrant]# vgs
+``` [root@hw06 vagrant]# vgs
   VG                  #PV #LV #SN Attr   VSize  VFree
   centos_centos7-hw06   1   2   0 wz--n- <5.00g    0
   ```
 И для логических томов в этой группе:
-```[root@hw06 vagrant]# lvs centos_centos7-hw06
+``` [root@hw06 vagrant]# lvs centos_centos7-hw06
   LV   VG                  Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
   root centos_centos7-hw06 -wi-ao----   4.39g
   swap centos_centos7-hw06 -wi-ao---- 616.00m
  ```
 Переименовываем VG с помощью утилиты __vgrename__ и проверяем результат:
-```[root@hw06 vagrant]# vgrename centos_centos7-hw06 hw06
+``` [root@hw06 vagrant]# vgrename centos_centos7-hw06 hw06
   Volume group "centos_centos7-hw06" successfully renamed to "hw06"
 [root@hw06 vagrant]# vgs
   VG   #PV #LV #SN Attr   VSize  VFree
@@ -85,7 +85,7 @@
  ```
 
 Проверяем содержимое /etc/fstab:
-```[root@hw06 vagrant]# cat /etc/fstab
+``` [root@hw06 vagrant]# cat /etc/fstab
 Created by anaconda on Wed Mar 11 13:13:28 2020
 
 Accessible filesystems, by reference, are maintained under '/dev/disk'
