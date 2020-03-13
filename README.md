@@ -1,44 +1,44 @@
-## Сброс пароля root
-### Шаг первый. Для всех способов
-В меню загрузчика нажимаем клавишу __е__ чтобы получить доступ к редактированию параметров загрузчика ядра.
+## РЎР±СЂРѕСЃ РїР°СЂРѕР»СЏ root
+### РЁР°Рі РїРµСЂРІС‹Р№. Р”Р»СЏ РІСЃРµС… СЃРїРѕСЃРѕР±РѕРІ
+Р’ РјРµРЅСЋ Р·Р°РіСЂСѓР·С‡РёРєР° РЅР°Р¶РёРјР°РµРј РєР»Р°РІРёС€Сѓ __Рµ__ С‡С‚РѕР±С‹ РїРѕР»СѓС‡РёС‚СЊ РґРѕСЃС‚СѓРї Рє СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЋ РїР°СЂР°РјРµС‚СЂРѕРІ Р·Р°РіСЂСѓР·С‡РёРєР° СЏРґСЂР°.
 
-### Способ №1
-Производим правку аналогично скриншоту:
+### РЎРїРѕСЃРѕР± в„–1
+РџСЂРѕРёР·РІРѕРґРёРј РїСЂР°РІРєСѓ Р°РЅР°Р»РѕРіРёС‡РЅРѕ СЃРєСЂРёРЅС€РѕС‚Сѓ:
 ![reset_pwd_02.png](./sreenshot/reset_pwd_02.png)
 
-После чего нажимаем __Ctrl+x__
-В результате проделанных действий получили доступ к шеллу с правами суперпользователя. Благодаря параметру __rw__ примененному выше раздел /root смонтирован в режиме read-write.
-Теперь можно сменить пароль стандартным способом. После чего создаем файл /.autorelabel чтобы подтвердить легитимность внесенных изменений в /etc/shadow для selinux. Затем производим перемонтирование в режим read-only. Отправляем систему в перезагрузку:
+РџРѕСЃР»Рµ С‡РµРіРѕ РЅР°Р¶РёРјР°РµРј __Ctrl+x__
+Р’ СЂРµР·СѓР»СЊС‚Р°С‚Рµ РїСЂРѕРґРµР»Р°РЅРЅС‹С… РґРµР№СЃС‚РІРёР№ РїРѕР»СѓС‡РёР»Рё РґРѕСЃС‚СѓРї Рє С€РµР»Р»Сѓ СЃ РїСЂР°РІР°РјРё СЃСѓРїРµСЂРїРѕР»СЊР·РѕРІР°С‚РµР»СЏ. Р‘Р»Р°РіРѕРґР°СЂСЏ РїР°СЂР°РјРµС‚СЂСѓ __rw__ РїСЂРёРјРµРЅРµРЅРЅРѕРјСѓ РІС‹С€Рµ СЂР°Р·РґРµР» /root СЃРјРѕРЅС‚РёСЂРѕРІР°РЅ РІ СЂРµР¶РёРјРµ read-write.
+РўРµРїРµСЂСЊ РјРѕР¶РЅРѕ СЃРјРµРЅРёС‚СЊ РїР°СЂРѕР»СЊ СЃС‚Р°РЅРґР°СЂС‚РЅС‹Рј СЃРїРѕСЃРѕР±РѕРј. РџРѕСЃР»Рµ С‡РµРіРѕ СЃРѕР·РґР°РµРј С„Р°Р№Р» /.autorelabel С‡С‚РѕР±С‹ РїРѕРґС‚РІРµСЂРґРёС‚СЊ Р»РµРіРёС‚РёРјРЅРѕСЃС‚СЊ РІРЅРµСЃРµРЅРЅС‹С… РёР·РјРµРЅРµРЅРёР№ РІ /etc/shadow РґР»СЏ selinux. Р—Р°С‚РµРј РїСЂРѕРёР·РІРѕРґРёРј РїРµСЂРµРјРѕРЅС‚РёСЂРѕРІР°РЅРёРµ РІ СЂРµР¶РёРј read-only. РћС‚РїСЂР°РІР»СЏРµРј СЃРёСЃС‚РµРјСѓ РІ РїРµСЂРµР·Р°РіСЂСѓР·РєСѓ:
 ![reset_pwd_03.png](./sreenshot/reset_pwd_03.png)
 
-В процессе загрузки наблюдаем реакцию selinux на смену пароля:
+Р’ РїСЂРѕС†РµСЃСЃРµ Р·Р°РіСЂСѓР·РєРё РЅР°Р±Р»СЋРґР°РµРј СЂРµР°РєС†РёСЋ selinux РЅР° СЃРјРµРЅСѓ РїР°СЂРѕР»СЏ:
 ![reset_pwd_04.png](./sreenshot/reset_pwd_04.png)
 
-Проверям авторизацию с новым паролем:
+РџСЂРѕРІРµСЂСЏРј Р°РІС‚РѕСЂРёР·Р°С†РёСЋ СЃ РЅРѕРІС‹Рј РїР°СЂРѕР»РµРј:
 ![reset_pwd_05.png](./sreenshot/reset_pwd_05.png)
 
 
-#### Способы №2 и №3 аналогичны первому, за исключением того, что при получении доступа к шеллу, в корень смонтирован не сам корень, а sysroot и получить доступ к содержимому корня и действиями над ним можно посредством chroot.
+#### РЎРїРѕСЃРѕР±С‹ в„–2 Рё в„–3 Р°РЅР°Р»РѕРіРёС‡РЅС‹ РїРµСЂРІРѕРјСѓ, Р·Р° РёСЃРєР»СЋС‡РµРЅРёРµРј С‚РѕРіРѕ, С‡С‚Рѕ РїСЂРё РїРѕР»СѓС‡РµРЅРёРё РґРѕСЃС‚СѓРїР° Рє С€РµР»Р»Сѓ, РІ РєРѕСЂРµРЅСЊ СЃРјРѕРЅС‚РёСЂРѕРІР°РЅ РЅРµ СЃР°Рј РєРѕСЂРµРЅСЊ, Р° sysroot Рё РїРѕР»СѓС‡РёС‚СЊ РґРѕСЃС‚СѓРї Рє СЃРѕРґРµСЂР¶РёРјРѕРјСѓ РєРѕСЂРЅСЏ Рё РґРµР№СЃС‚РІРёСЏРјРё РЅР°Рґ РЅРёРј РјРѕР¶РЅРѕ РїРѕСЃСЂРµРґСЃС‚РІРѕРј chroot.
 
-### Способ №2
-Производим правку аналогично скриншоту:
+### РЎРїРѕСЃРѕР± в„–2
+РџСЂРѕРёР·РІРѕРґРёРј РїСЂР°РІРєСѓ Р°РЅР°Р»РѕРіРёС‡РЅРѕ СЃРєСЂРёРЅС€РѕС‚Сѓ:
 ![reset_pwd_12.png](./sreenshot/reset_pwd_12.png)
 
-После чего нажимаем __Ctrl+x__
-В результате проделанных действий получили доступ к шеллу с правами суперпользователя. При этом способе при получении доступа к шеллу, в корень смонтирован не сам корень, а sysroot и получить доступ к содержимому корня и действиями над ним можно посредством chroot. Аналогично первому способу раздел смотнтирован в режиме read-write. После применения chroot действия аналогичны первому способу:
+РџРѕСЃР»Рµ С‡РµРіРѕ РЅР°Р¶РёРјР°РµРј __Ctrl+x__
+Р’ СЂРµР·СѓР»СЊС‚Р°С‚Рµ РїСЂРѕРґРµР»Р°РЅРЅС‹С… РґРµР№СЃС‚РІРёР№ РїРѕР»СѓС‡РёР»Рё РґРѕСЃС‚СѓРї Рє С€РµР»Р»Сѓ СЃ РїСЂР°РІР°РјРё СЃСѓРїРµСЂРїРѕР»СЊР·РѕРІР°С‚РµР»СЏ. РџСЂРё СЌС‚РѕРј СЃРїРѕСЃРѕР±Рµ РїСЂРё РїРѕР»СѓС‡РµРЅРёРё РґРѕСЃС‚СѓРїР° Рє С€РµР»Р»Сѓ, РІ РєРѕСЂРµРЅСЊ СЃРјРѕРЅС‚РёСЂРѕРІР°РЅ РЅРµ СЃР°Рј РєРѕСЂРµРЅСЊ, Р° sysroot Рё РїРѕР»СѓС‡РёС‚СЊ РґРѕСЃС‚СѓРї Рє СЃРѕРґРµСЂР¶РёРјРѕРјСѓ РєРѕСЂРЅСЏ Рё РґРµР№СЃС‚РІРёСЏРјРё РЅР°Рґ РЅРёРј РјРѕР¶РЅРѕ РїРѕСЃСЂРµРґСЃС‚РІРѕРј chroot. РђРЅР°Р»РѕРіРёС‡РЅРѕ РїРµСЂРІРѕРјСѓ СЃРїРѕСЃРѕР±Сѓ СЂР°Р·РґРµР» СЃРјРѕС‚РЅС‚РёСЂРѕРІР°РЅ РІ СЂРµР¶РёРјРµ read-write. РџРѕСЃР»Рµ РїСЂРёРјРµРЅРµРЅРёСЏ chroot РґРµР№СЃС‚РІРёСЏ Р°РЅР°Р»РѕРіРёС‡РЅС‹ РїРµСЂРІРѕРјСѓ СЃРїРѕСЃРѕР±Сѓ:
 ![reset_pwd_13.png](./sreenshot/reset_pwd_13.png)
 
-Далее аналогично способу №1:
+Р”Р°Р»РµРµ Р°РЅР°Р»РѕРіРёС‡РЅРѕ СЃРїРѕСЃРѕР±Сѓ в„–1:
 ![reset_pwd_14.png](./sreenshot/reset_pwd_14.png)
 
 ![reset_pwd_15.png](./sreenshot/reset_pwd_15.png)
 
 
-### Способ №3
-Производим правку аналогично скриншоту:
+### РЎРїРѕСЃРѕР± в„–3
+РџСЂРѕРёР·РІРѕРґРёРј РїСЂР°РІРєСѓ Р°РЅР°Р»РѕРіРёС‡РЅРѕ СЃРєСЂРёРЅС€РѕС‚Сѓ:
 ![reset_pwd_22.png](./sreenshot/reset_pwd_22.png)
 
-Дальнейшие шаги аналогичны способу №2:
+Р”Р°Р»СЊРЅРµР№С€РёРµ С€Р°РіРё Р°РЅР°Р»РѕРіРёС‡РЅС‹ СЃРїРѕСЃРѕР±Сѓ в„–2:
 ![reset_pwd_23.png](./sreenshot/reset_pwd_23.png)
 
 ![reset_pwd_24.png](./sreenshot/reset_pwd_24.png)
@@ -47,19 +47,19 @@
 
 
 
-## Переименование VG
-Выясняем данные по VG:
+## РџРµСЂРµРёРјРµРЅРѕРІР°РЅРёРµ VG
+Р’С‹СЏСЃРЅСЏРµРј РґР°РЅРЅС‹Рµ РїРѕ VG:
 ```[root@hw06 vagrant]# vgs
   VG                  #PV #LV #SN Attr   VSize  VFree
   centos_centos7-hw06   1   2   0 wz--n- <5.00g    0
   ```
-И для логических томов в этой группе:
+Р РґР»СЏ Р»РѕРіРёС‡РµСЃРєРёС… С‚РѕРјРѕРІ РІ СЌС‚РѕР№ РіСЂСѓРїРїРµ:
 ```[root@hw06 vagrant]# lvs centos_centos7-hw06
   LV   VG                  Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
   root centos_centos7-hw06 -wi-ao----   4.39g
   swap centos_centos7-hw06 -wi-ao---- 616.00m
  ```
-Переименовываем VG с помощью утилиты __vgrename__ и проверяем результат:
+РџРµСЂРµРёРјРµРЅРѕРІС‹РІР°РµРј VG СЃ РїРѕРјРѕС‰СЊСЋ СѓС‚РёР»РёС‚С‹ __vgrename__ Рё РїСЂРѕРІРµСЂСЏРµРј СЂРµР·СѓР»СЊС‚Р°С‚:
 ```[root@hw06 vagrant]# vgrename centos_centos7-hw06 hw06
   Volume group "centos_centos7-hw06" successfully renamed to "hw06"
 [root@hw06 vagrant]# vgs
@@ -68,7 +68,7 @@
 [root@hw06 vagrant]# sed 's/centos_centos7-hw06/hw06/g' /etc/fstab
  ```
 
-Проверяем содержимое /etc/fstab:
+РџСЂРѕРІРµСЂСЏРµРј СЃРѕРґРµСЂР¶РёРјРѕРµ /etc/fstab:
 ```[root@hw06 vagrant]# cat /etc/fstab
 Created by anaconda on Wed Mar 11 13:13:28 2020
 
@@ -79,36 +79,36 @@ See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info
 UUID=867dc2a2-f38a-422e-a518-b346654e1614 /boot                   xfs     defaults        0 0
 /dev/mapper/centos_centos7--hw06-swap swap                    swap    defaults        0 0
 ```
-Здесь видно, что необходимо учесть для замены посредством __sed:
+Р—РґРµСЃСЊ РІРёРґРЅРѕ, С‡С‚Рѕ РЅРµРѕР±С…РѕРґРёРјРѕ СѓС‡РµСЃС‚СЊ РґР»СЏ Р·Р°РјРµРЅС‹ РїРѕСЃСЂРµРґСЃС‚РІРѕРј __sed:
 ```[root@hw06 vagrant]# sed -i 's/centos_centos7--hw06/hw06/g' /etc/fstab
 ```
-Так же, с помощью __sed редактируем /etc/default/grub
+РўР°Рє Р¶Рµ, СЃ РїРѕРјРѕС‰СЊСЋ __sed СЂРµРґР°РєС‚РёСЂСѓРµРј /etc/default/grub
 ```[root@hw06 vagrant]# sed -i 's/centos_centos7-hw06/hw06/g' /etc/default/grub
  ```
-И /boot/grub2/grub.cfg:
+Р /boot/grub2/grub.cfg:
 ```[root@hw06 vagrant]# sed -i 's/centos_centos7-hw06/hw06/g' /boot/grub2/grub.cfg
  ```
-Проверяем:
+РџСЂРѕРІРµСЂСЏРµРј:
 ```[root@hw06 vagrant]# grep hw06 /boot/grub2/grub.cfg
         linux16 /vmlinuz-3.10.0-1062.12.1.el7.x86_64 root=/dev/mapper/centos_centos7--hw06-root ro crashkernel=auto spectre_v2=retpoline rd.lvm.lv=hw06/root rd.lvm.lv=hw06/swap rhgb quiet LANG=en_US.UTF-8
         linux16 /vmlinuz-3.10.0-1062.el7.x86_64 root=/dev/mapper/centos_centos7--hw06-root ro crashkernel=auto spectre_v2=retpoline rd.lvm.lv=hw06/root rd.lvm.lv=hw06/swap rhgb quiet LANG=en_US.UTF-8
         linux16 /vmlinuz-0-rescue-a002dae36b884b389571c3b93e615705 root=/dev/mapper/centos_centos7--hw0-root ro crashkernel=auto spectre_v2=retpoline rd.lvm.lv=hw06/root rd.lvm.lv=hw06/swap rhgb quiet
  ```
-Заменяем оставшееся:
+Р—Р°РјРµРЅСЏРµРј РѕСЃС‚Р°РІС€РµРµСЃСЏ:
 ```[root@hw06 vagrant]# sed -i 's/centos_centos7--hw06/hw06/g' /boot/grub2/grub.cfg
  ```
-Проверяем:
+РџСЂРѕРІРµСЂСЏРµРј:
 ```[root@hw06 vagrant]# grep hw06 /boot/grub2/grub.cfg
         linux16 /vmlinuz-3.10.0-1062.12.1.el7.x86_64 root=/dev/mapper/hw06-root ro crashkernel=auto spectre_v2=retpoline rd.lvm.lv=hw06/root rd.lvm.lv=hw06/swap rhgb quiet LANG=en_US.UTF-8
         linux16 /vmlinuz-3.10.0-1062.el7.x86_64 root=/dev/mapper/hw06-root ro crashkernel=auto spectre_v2=retpoline rd.lvm.lv=hw06/root rd.lvm.lv=hw06/swap rhgb quiet LANG=en_US.UTF-8
         linux16 /vmlinuz-0-rescue-a002dae36b884b389571c3b93e615705 root=/dev/mapper/hw06-root ro crashkernel=auto spectre_v2=retpoline rd.lvm.lv=hw06/root rd.lvm.lv=hw06/swap rhgb quiet
  ```
-Обновляем атрибуты VG
+РћР±РЅРѕРІР»СЏРµРј Р°С‚СЂРёР±СѓС‚С‹ VG
 ```[root@hw06 vagrant]# vgchange -ay
   2 logical volume(s) in volume group "hw06" now active
  ```
 
-Обновляем initrd:
+РћР±РЅРѕРІР»СЏРµРј initrd:
 ```[root@hw06 vagrant]# mkinitrd -f -v /boot/initramfs-$(uname -r).img $(uname -r)
 /sbin/dracut: line 681: warning: setlocale: LC_MESSAGES: cannot change locale (C.UTF-8): No such file or directory
 /sbin/dracut: line 682: warning: setlocale: LC_CTYPE: cannot change locale (C.UTF-8): No such file or directory
@@ -204,10 +204,10 @@ intel-06-55-04: caveat is disabled in configuration
 *** Creating image file done ***
 *** Creating initramfs image file '/boot/initramfs-3.10.0-1062.12.1.el7.x86_64.img' done ***
  ```
-Перезагружаемся:
+РџРµСЂРµР·Р°РіСЂСѓР¶Р°РµРјСЃСЏ:
 ```[root@hw06 vagrant]# reboot
  ```
-### Проверка
+### РџСЂРѕРІРµСЂРєР°
 ```[root@hw06 vagrant]# vgs
   VG   #PV #LV #SN Attr   VSize  VFree
   hw06   1   2   0 wz--n- <5.00g    0
@@ -218,8 +218,8 @@ intel-06-55-04: caveat is disabled in configuration
 [root@hw06 vagrant]#
  ```
 
-## Добавить свой модуль в initrd
-Переходим в директорию с модулями, создаем новую директорию для своего модуля, в ней создаем файлы модуля:
+## Р”РѕР±Р°РІРёС‚СЊ СЃРІРѕР№ РјРѕРґСѓР»СЊ РІ initrd
+РџРµСЂРµС…РѕРґРёРј РІ РґРёСЂРµРєС‚РѕСЂРёСЋ СЃ РјРѕРґСѓР»СЏРјРё, СЃРѕР·РґР°РµРј РЅРѕРІСѓСЋ РґРёСЂРµРєС‚РѕСЂРёСЋ РґР»СЏ СЃРІРѕРµРіРѕ РјРѕРґСѓР»СЏ, РІ РЅРµР№ СЃРѕР·РґР°РµРј С„Р°Р№Р»С‹ РјРѕРґСѓР»СЏ:
 ```[root@hw06 vagrant]# cd /usr/lib/dracut/modules.d/
 [root@hw06 modules.d]# mkdir 01logo
 [root@hw06 modules.d]# cd 01logo
@@ -249,10 +249,10 @@ cat <<'msgend'
 +--+++-++--++--+--++--+--++++--+++
 +------++--++--+--++-----++--++--+
 ++++++++++++++++++++++++++++++++++
-+г==¬+++++++++++г¬г¬гT=¬г=T¬гT¬+++
-+L¦¦-г¬г=T=T=T=¬¦L¦L+¦=¦¦=¦L+¦L¬++
-+г¦¦¬¦L¦+¦¬¦г¦¦¦¦г¦¦¦¦=¦¦=¦¦¦¦г¦++
-+L==-L=¦=-L=-L=-L=¦¦¦¦=-L=¦¦¦¦=-++
++Рі==В¬+++++++++++РіВ¬РіВ¬РіT=В¬Рі=TВ¬РіTВ¬+++
++LВ¦В¦-РіВ¬Рі=T=T=T=В¬В¦LВ¦L+В¦=В¦В¦=В¦L+В¦LВ¬++
++РіВ¦В¦В¬В¦LВ¦+В¦В¬В¦РіВ¦В¦В¦В¦РіВ¦В¦В¦В¦=В¦В¦=В¦В¦В¦В¦РіВ¦++
++L==-L=В¦=-L=-L=-L=В¦В¦В¦В¦=-L=В¦В¦В¦В¦=-++
 ++++++++++++++++++++++++++++++++++
 msgend
 sleep 10
@@ -274,7 +274,7 @@ install() {
 }
  ```
 
-Пересоздаем initrd:
+РџРµСЂРµСЃРѕР·РґР°РµРј initrd:
 ```[root@hw06 vagrant]# mkinitrd -f -v /boot/initramfs-$(uname -r).img $(uname -r)
 /sbin/dracut: line 681: warning: setlocale: LC_MESSAGES: cannot change locale (C.UTF-8): No such file or directory
 /sbin/dracut: line 682: warning: setlocale: LC_CTYPE: cannot change locale (C.UTF-8): No such file or directory
@@ -371,9 +371,9 @@ intel-06-55-04: caveat is disabled in configuration
 *** Creating image file done ***
 *** Creating initramfs image file '/boot/initramfs-3.10.0-1062.12.1.el7.x86_64.img' done ***
  ```
-Проверяем:
+РџСЂРѕРІРµСЂСЏРµРј:
 ```[root@hw06 01logo]# lsinitrd -m /boot/initramfs-$(uname -r).img | grep logo
 logo
  ```
-Отправляем систему в перезагрузку и в процессе наблюдаем результат:
+РћС‚РїСЂР°РІР»СЏРµРј СЃРёСЃС‚РµРјСѓ РІ РїРµСЂРµР·Р°РіСЂСѓР·РєСѓ Рё РІ РїСЂРѕС†РµСЃСЃРµ РЅР°Р±Р»СЋРґР°РµРј СЂРµР·СѓР»СЊС‚Р°С‚:
 ![add_own_module_proof.png](./screenshot/add_own_module_proof.png) 
