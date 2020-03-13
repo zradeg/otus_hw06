@@ -36,9 +36,11 @@
 После чего нажимаем __Ctrl+x__
 В результате проделанных действий получили доступ к шеллу с правами суперпользователя. При этом способе при получении доступа к шеллу, в корень смонтирован не сам корень, а sysroot и получить доступ к содержимому корня и действиями над ним можно посредством chroot. Аналогично первому способу раздел смотнтирован в режиме read-write.
 После применения chroot действия аналогичны первому способу:
+
 ![reset_pwd_13.png](https://github.com/zradeg/otus_hw06/blob/master/screenshot/reset_pwd_13.png)
 
 Далее аналогично способу №1:
+
 ![reset_pwd_14.png](https://github.com/zradeg/otus_hw06/blob/master/screenshot/reset_pwd_14.png)
 
 ![reset_pwd_15.png](https://github.com/zradeg/otus_hw06/blob/master/screenshot/reset_pwd_15.png)
@@ -46,6 +48,7 @@
 
 ### Способ №3
 Производим правку аналогично скриншоту:
+
 ![reset_pwd_22.png](https://github.com/zradeg/otus_hw06/blob/master/screenshot/reset_pwd_22.png)
 
 Дальнейшие шаги аналогичны способу №2:
